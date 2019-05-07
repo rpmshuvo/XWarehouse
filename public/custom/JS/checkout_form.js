@@ -1,6 +1,15 @@
 var row = null;
 var products = [];
+//fro side Bar
+var sideBar = document.getElementById("sideBar");
+// sideBar.onmouseover = function(){
+//   this.style.backgroundColor = "green";
 
+// };
+  //sideBar.style.backgroundColor = "darkgray";
+  sideBar.style.padding = "20px";
+
+//for checkout form
 function totalPrice() {
   var unit = document.getElementById("quantity").value;
   var pup = document.getElementById("price").value;
@@ -53,21 +62,28 @@ function finalCalculation() {
 function onFormSubmit() {
   var formData = readFormData();
   //console.log(formData);
-  if (row == null) insertNewRecord(formData);
-  resetForm();
+  if(formData['available'] > formData['quantity'] && formData[
+    'quantity'] > 0 ){
+    if (row == null) insertNewRecord(formData);
+    resetForm();
+  }else{
+    alert("only '" + formData['available'] + "' unit are available and you select '" + formData['quantity'] + "' unit of that product" );
+  }
+  
 }
 
 function readFormData() {
   var formData = {};
   formData["productId"] =document.getElementById("productName").value;
   formData["productName"] =getSelectedText("productName");
+  formData["available"] = document.getElementById("available").innerHTML;
   formData["quantity"] = document.getElementById("quantity").value;
   formData["price"] = document.getElementById("price").value;
   formData["totalPrice"] = document.getElementById("totalPrice").innerHTML;
   formData["percentage"] = document.getElementById("percentage").value;
   formData["netPrice"] = document.getElementById("netPrice").innerHTML;
-  formData["name"] = document.getElementById("name").value;
-  formData["address"] = document.getElementById("address").value;
+  // formData["name"] = document.getElementById("name").value;
+  // formData["address"] = document.getElementById("address").value;
   return formData;
 }
 //to get element text
@@ -109,8 +125,8 @@ function insertNewRecord(data) {
 
   var table = document.getElementById("here");
 
-  document.getElementById("cus_name").innerHTML = data.name;
-  document.getElementById("cus_add").innerHTML = data.address;
+  // document.getElementById("cus_name").innerHTML = data.name;
+  // document.getElementById("cus_add").innerHTML = data.address;
   calcu();
 
   function calcu() {
@@ -132,10 +148,10 @@ function resetForm() {
   document.getElementById("totalPrice").innerHTML = "_";
   document.getElementById("percentage").value = "";
   document.getElementById("netPrice").innerHTML = "_";
-  document.getElementById("name").value = document.getElementById("name").value;
-  document.getElementById("address").value = document.getElementById(
-    "address"
-  ).value;
+  // document.getElementById("name").value = document.getElementById("name").value;
+  // document.getElementById("address").value = document.getElementById(
+  //   "address"
+  // ).value;
   document.getElementById("deliveryCharge").value = "";
   document.getElementById("discount").value = "";
   document.getElementById("netAmount").value = "";
@@ -183,6 +199,34 @@ function onDelete(td) {
 
 $(document).ready(function(){
 
+//for find invoice information in return form
+$('#invoiceId').keyup(function(){
+  var invoiceId = $(this).val();
+  $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name = "csrf-token"]').attr('content')} })
+  $.ajax({
+    url : '/invoiceInformation',
+    type : 'get',
+    data : {'id' : invoiceId},
+    dataType : 'JSON',
+    success :function(data){
+      if(data != null){
+        console.log(data);
+      $('#phoneNumber').val(data.phoneNumber);
+      $('#name').val(data.name);
+      $('#address').val(data.address);
+    }else{
+      console.log('emply')
+      
+    }
+    }
+  });
+});
+
+
+
+
+//for find product's price
+
   $('#productName').change(function(){
     var productId= $(this).val();
     var a = $(this).parent();
@@ -201,9 +245,14 @@ $(document).ready(function(){
     });
   });
 
+//for submit the checkout form
+
   $('#invoiceForm').submit(function(event){
       event.preventDefault();
-  
+  if (confirm('are you sure')) {
+      var phoneNumber = $('#phoneNumber').val();
+      var name = $('#name').val();
+      var address = $('#address').val();
       var totalAmount = $('#totalAmount').val();
       var deliveryCharge = $('#deliveryCharge').val();
       var discount = $('#discount').val();
@@ -216,6 +265,9 @@ $(document).ready(function(){
         url:'/invoices',
         type:'POST',
         data:{'products': products,
+              'phoneNumber' : phoneNumber,
+              'name' : name,
+              'address' : address,
               'totalAmount' : totalAmount,
               'deliveryCharge' : deliveryCharge,
               'discount' : discount,
@@ -230,6 +282,7 @@ $(document).ready(function(){
 
         }
       });
+    }
   });
 
 });

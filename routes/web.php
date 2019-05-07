@@ -24,6 +24,7 @@ Route::Resource('products', 'ProductController');
 Route::Resource('invoices', 'invoiceController');
 Route::Resource('returninfos', 'ReturninfoController');
 Route::get('/findPrice','ProductController@findPrice');
+Route::get('/invoiceInformation/','ReturninfoController@invoiceInformation');
 
 Route::Resource('employees', 'EmployeeController')->middleware('role:admin');
 

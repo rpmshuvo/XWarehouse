@@ -45,7 +45,7 @@
 						<i class="fa fa-dollar w3-xlarge"></i>
 					</div>
 					<div class="w3-right">
-						<h3>#####</h3>
+						<h3>{{$stockValue}}</h3>
 					</div>
 					<div class="w3-clear"></div>
 					<h4>Value of Stock</h4>

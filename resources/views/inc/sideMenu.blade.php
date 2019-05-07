@@ -1,11 +1,12 @@
 <!-- navbar-->
 <div class="container">
 	
-<ul class="navbar-nav ml-auto">
-	<li class="nav-item">
+<ul id="sideBar" class="navbar-nav  bg-dark text-white">
+	<li class="nav-item p">
 		<a href="/home" class="nav-link">Home</a>
 	</li>
-	<li class="nav-item dropdown">
+	<hr>
+	<li class="nav-item dropdown ">
 		<a class="dropdown-toggle" href="#" id="categoryDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">category</a>
 		<div class="dropdown-menu" aria-labelledby="categoryDropdown">
 			@role('admin|moderator')
@@ -14,6 +15,7 @@
 			<a class="dropdown-item" href="/categories">Manage Category</a>
 		</div>
 	</li>
+	<hr>
 	<li class="nav-item dropdown">
 		<a class="dropdown-toggle" href="#" id="productDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Products</a>
 		<div class="dropdown-menu" aria-labelledby="productDropdown">
@@ -23,6 +25,7 @@
 			<a class="dropdown-item" href="/products">Manage Products</a>
 		</div>
 	</li>
+	<hr>
 	<li class="nav-item dropdown">
 		<a class="dropdown-toggle" href="#" id="invoiceDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Invoices</a>
 		<div class="dropdown-menu" aria-labelledby="invoiceDropdown">
@@ -30,6 +33,7 @@
 			<a class="dropdown-item" href="/invoices">Invoices</a>
 		</div>
 	</li>
+	<hr>
 	<li class="nav-item dropdown">
 		<a class="dropdown-toggle" href="#" id="invoiceDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Return Info</a>
 		<div class="dropdown-menu" aria-labelledby="invoiceDropdown">
@@ -37,6 +41,7 @@
 			<a class="dropdown-item" href="/returninfos">Return Info</a>
 		</div>
 	</li>
+	<hr>
 
 	@role('admin')
 	<li class="nav-item dropdown">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Invoice;
 use App\Product;
+use App\Customer;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
@@ -46,14 +47,20 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        // $totalAmount = $request->input('totalAmount');
-        // $deliveryCharge = $request->input('deliveryCharge');
-        // $discount = $request->input('discount');
-        // $netAmount = $request->input('netAmount');
-        // $paidAmount = $request->input('paidAmount');
-        // $customer_id = "1";
-        // $user_id = Auth::user()->id;
 
+        //to find customer is exist in databade or not
+        $customer = Customer::where('phoneNumber',$request->input('phoneNumber'))->first();
+        
+        if (empty($customer)) {
+            
+            $customer = new Customer;
+            $customer->name = $request->input('name');
+            $customer->address = $request->input('address');
+            $customer->phoneNumber = $request->input('phoneNumber');
+            $customer->save();
+
+
+        } 
          $products = $request->get('products');
 
 
@@ -64,15 +71,20 @@ class InvoiceController extends Controller
          $invoice->netAmount = floatval($request->input('netAmount'));
          $invoice->paidAmount = floatval($request->input('paidAmount'));
          $invoice->amountDue = floatval($request->input('amountDue'));
-
-         $invoice->customer_id = 1;
+         $invoice->customer_id = $customer->id;
          $invoice->user_id =auth()->user()->id ;
          $invoice->save();
          
-         foreach ($products as $key => $product) {
-             $invoice->products()->attach(floatval($product['productId']),['quantity'=>$product['quantity']]);
-         }
-         return response($request);
+        foreach ($products as $key => $product) {
+
+            // data inserting to pivot table 
+            $invoice->products()->attach(floatval($product['productId']),['quantity'=>$product['quantity']]);
+           
+           // after selling deduct the selling quantity from database 
+            Product::where('id',$product['productId'])->decrement('quantity', $product['quantity']);
+
+        }
+        return response($customer);
     }
 
     /**
@@ -118,5 +130,11 @@ class InvoiceController extends Controller
     public function destroy(Invoice $invoice)
     {
         //
+    }
+
+    public function quantityUpdate( $id, $quantity)
+    {
+        
+        return ;
     }
 }

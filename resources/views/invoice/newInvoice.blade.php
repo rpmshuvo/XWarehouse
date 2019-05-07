@@ -24,89 +24,91 @@
 							<option value="{{$product->id}}">{{$product->productName}}</option>
 							@endforeach
 							@endif
-					</select>
+						</select>
+					</div>
 				</div>
-			</div>
-			<div class="form-group col-md-1 col-lg-4">
+				<div class="form-group col-md-1 col-lg-4">
 				<span class="text-muted"
 				>Available&emsp;<span
 				class="badge badge-danger badge-pill"
 				id="available"
+				name = "available"
 				>-</span
 				></span
 				><!--Connected with DB-->
-			</div>
-			<div class="form-group col-md-2 col-lg-4">
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
-						<span class="input-group-text">$PUP
-						</span>
+				</div>
+				<div class="form-group col-md-2 col-lg-4">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text">$PUP
+							</span>
+						</div>
+						<input
+						type="text"
+						class="form-control"
+						aria-label="Dollar amount (with dot and two decimal places)"
+						required
+						placeholder="0.00"
+						name="price"
+						id="price"
+						onkeyup="totalPrice()"
+						readonly
+						/><!--Connected with DB & will be always in readonly mode-->
 					</div>
-					<input
-					type="text"
-					class="form-control"
-					aria-label="Dollar amount (with dot and two decimal places)"
-					required
-					placeholder="0.00"
-					name="price"
-					id="price"
-					onkeyup="totalPrice()"
-					readonly
-					/><!--Connected with DB & will be always in readonly mode-->
+				</div>
+				<div class="form-group col-md-2 col-lg-4">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Quantity</span>
+						</div>
+						<input
+						type="number"
+						class="form-control"
+						name="quantity"
+						id="quantity"
+						placeholder="Quantity"
+						onkeyup="totalPrice()"
+						required
+						/>
+					</div>
+				</div>
+				<div class="form-group col-md-1 col-lg-4">
+					<span class="text-muted"
+					>Total Price&emsp;<span
+					class="badge badge-warning badge-pill"
+					id="totalPrice"
+					>_</span
+					></span
+					>
+				</div>
+				<div class="form-group col-md-2 col-lg-4">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Discount</span>
+						</div>
+						<input
+						type="number"
+						class="form-control"
+						name="percentage"
+						id="percentage"
+						placeholder="In Percentage"
+						required
+						onkeyup="netPrice()"
+						/>
+					</div>
+				</div>
+				<div class="form-group col-md-1 col-lg-4">
+					<span class="text-muted"
+					>Net Price&emsp;<span
+					class="badge badge-success badge-pill"
+					id="netPrice"
+					>_</span
+					></span
+					>
 				</div>
 			</div>
-			<div class="form-group col-md-2 col-lg-4">
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
-						<span class="input-group-text">Quantity</span>
-					</div>
-					<input
-					type="number"
-					class="form-control"
-					name="quantity"
-					id="quantity"
-					placeholder="Quantity"
-					onkeyup="totalPrice()"
-					required
-					/>
-				</div>
-			</div>
-			<div class="form-group col-md-1 col-lg-4">
-				<span class="text-muted"
-				>Total Price&emsp;<span
-				class="badge badge-warning badge-pill"
-				id="totalPrice"
-				>_</span
-				></span
-				>
-			</div>
-			<div class="form-group col-md-2 col-lg-4">
-				<div class="input-group">
-					<div class="input-group-prepend">
-						<span class="input-group-text">Discount</span>
-					</div>
-					<input
-					type="number"
-					class="form-control"
-					name="percentage"
-					id="percentage"
-					placeholder="In Percentage"
-					required
-					onkeyup="netPrice()"
-					/>
-				</div>
-			</div>
-			<div class="form-group col-md-1 col-lg-4">
-				<span class="text-muted"
-				>Net Price&emsp;<span
-				class="badge badge-success badge-pill"
-				id="netPrice"
-				>_</span
-				></span
-				>
-			</div>
-			</div>
-			<hr />
+			
+<!--
 			<div class="row">
 				<div class="col-md-6 mb-3">
 					<label for="Name">Name (Individual/Organization)</label>
@@ -129,6 +131,7 @@
 					/>
 				</div>
 			</div>
+-->
 			<hr />
 			<div class="form-group col-md-4">
 				<button type="submit" class="btn btn-primary btn-md">
@@ -150,13 +153,48 @@
 			<h2 align="center">
 				X Warehouse
 			</h2>
-
+<form id="invoiceForm" name="invoiceForm">	
 			<address align="center">
+				<div class=" form-group row">
+					<div class=" col-md-6 mb-3">
+						<label for="phoneNumber">Phone Number</label>
+						<input
+						type="text"
+						class="form-control"
+						id="phoneNumber"
+						placeholder="Phone Number"
+						required
+						/>
+					</div>
+		
+				<div class="col-md-6 mb-3">
+					<label for="name">Name (Individual/Organization)</label>
+					<input
+					type="text"
+					class="form-control"
+					id="name"
+					placeholder="Name"
+					required
+					/>
+				</div>
+				<div class="col-md-6 mb-3">
+					<label for="address">Address</label>
+					<input
+					type="text"
+					class="form-control"
+					id="address"
+					placeholder="1234 Main St"
+					required
+					/>
+				</div>
+				</div>
+	<!--
 				<span class="text-muted">Customer Name:</span
 					><span id="cus_name" name="customerName" style="border-bottom: 1px dashed black"></span
 						><span>,</span> <span class="text-muted">Customer Address:</span
 							><span id="cus_add" name="customerAddress" style="border-bottom: 1px dashed black"></span
 								><span>;</span>
+-->
 			</address>
 			<hr />
 			<div>
@@ -182,7 +220,7 @@
 <!-- invoice form
 		<form method="POST" action="{{route('invoices.store')}}" accept-charset="UTF-8" enctype="multipart/form-data">
 			@csrf -->
-		<form id="invoiceForm" name="invoiceForm">	
+	<!--	<form id="invoiceForm" name="invoiceForm">	-->
 			<div>
 							<div class="form-group row">
 								<label for="totalAmount" class="col-sm-2 col-form-label"

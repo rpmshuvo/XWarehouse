@@ -27,7 +27,14 @@ class HomeController extends Controller
     {
         $numberOfEmployees = User::count();
         $totalProducts = Product::sum('quantity');
+        $products = Product::all();
+        $stockValue = 0 ;
+        foreach ($products as $key => $product) {
+            $stockValue = $stockValue + $product->quantity * $product->sellPrice;
+        }
+        
         return view('dashboard')->with('numberOfEmployees',$numberOfEmployees)
-                                ->with('totalProducts',$totalProducts);
+                                ->with('totalProducts',$totalProducts)
+                                ->with('stockValue',$stockValue);
     }
 }

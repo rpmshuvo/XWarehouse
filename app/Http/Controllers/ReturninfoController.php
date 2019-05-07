@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Returninfo;
+use App\Invoice;
+use App\Customer;
 use Illuminate\Http\Request;
 
 class ReturninfoController extends Controller
@@ -10,6 +12,20 @@ class ReturninfoController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function invoiceInformation(Request $request){
+        $id = $request->input('id');
+        $invoiceInfo = Invoice::findorFail($id);
+        $customer = Customer::where('id',$invoiceInfo->customer_id)->first();
+        if(!empty($invoiceInfo)){
+            return response($customer);
+        }else
+        {
+           
+            return response($request);
+        }
+        
     }
 
     /**
