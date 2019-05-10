@@ -15,6 +15,13 @@ class CreateReturninfosTable extends Migration
     {
         Schema::create('returninfos', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('product_id');
+            $table->integer('returnQuantity');
+            $table->integer('damage');
+            $table->double('returnAmount');
+            $table->integer('invoice_id');
+
+
             $table->timestamps();
         });
     }

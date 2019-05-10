@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Product;
+use App\Returninfo;
 
 class HomeController extends Controller
 {
@@ -26,6 +27,7 @@ class HomeController extends Controller
     public function index()
     {
         $numberOfEmployees = User::count();
+        $damage = Returninfo::sum('damage');
         $totalProducts = Product::sum('quantity');
         $products = Product::all();
         $stockValue = 0 ;
@@ -34,6 +36,7 @@ class HomeController extends Controller
         }
         
         return view('dashboard')->with('numberOfEmployees',$numberOfEmployees)
+                                ->with('damage',$damage)
                                 ->with('totalProducts',$totalProducts)
                                 ->with('stockValue',$stockValue);
     }

@@ -57,7 +57,7 @@
 						<i class="fa fa-trash w3-xxxlarge"></i>
 					</div>
 					<div class="w3-right">
-						<h3>#####</h3>
+						<h3>{{$damage}}</h3>
 					</div>
 					<div class="w3-clear"></div>
 					<h4>Damage</h4>

@@ -62,12 +62,11 @@ function finalCalculation() {
 function onFormSubmit() {
   var formData = readFormData();
   //console.log(formData);
-  if(formData['available'] > formData['quantity'] && formData[
-    'quantity'] > 0 ){
+  if(parseInt(formData['available']) >= formData['quantity'] && formData['quantity'] != 0){
     if (row == null) insertNewRecord(formData);
     resetForm();
   }else{
-    alert("only '" + formData['available'] + "' unit are available and you select '" + formData['quantity'] + "' unit of that product" );
+    alert("only ' " + formData['available'] + " ' unit are available and you select ' " + formData['quantity'] + " ' unit of that product" );
   }
   
 }
@@ -86,6 +85,7 @@ function readFormData() {
   // formData["address"] = document.getElementById("address").value;
   return formData;
 }
+
 //to get element text
 function getSelectedText(elementId) {
     var elt = document.getElementById(elementId);
@@ -199,28 +199,6 @@ function onDelete(td) {
 
 $(document).ready(function(){
 
-//for find invoice information in return form
-$('#invoiceId').keyup(function(){
-  var invoiceId = $(this).val();
-  $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name = "csrf-token"]').attr('content')} })
-  $.ajax({
-    url : '/invoiceInformation',
-    type : 'get',
-    data : {'id' : invoiceId},
-    dataType : 'JSON',
-    success :function(data){
-      if(data != null){
-        console.log(data);
-      $('#phoneNumber').val(data.phoneNumber);
-      $('#name').val(data.name);
-      $('#address').val(data.address);
-    }else{
-      console.log('emply')
-      
-    }
-    }
-  });
-});
 
 
 
@@ -278,7 +256,8 @@ $('#invoiceId').keyup(function(){
         dataType:'JSON',
         success:function(data)
         {
-          console.log(data);
+          //console.log(data);
+           window.location.replace("/invoices/" + data);
 
         }
       });

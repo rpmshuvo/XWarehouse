@@ -17,6 +17,10 @@ class CreateInvoiceProductTable extends Migration
             $table->integer('invoice_id')->unsigned();
             $table->integer('product_id')->unsigned();
             $table->string('quantity');
+            $table->string('pup');
+            $table->string('percentage');
+            $table->string('netPrice');
+
            
 
             $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Returninfo;
 use App\Invoice;
 use App\Customer;
+use App\Product;
 use Illuminate\Http\Request;
 
 class ReturninfoController extends Controller
@@ -17,14 +18,15 @@ class ReturninfoController extends Controller
     public function invoiceInformation(Request $request){
         $id = $request->input('id');
         $invoiceInfo = Invoice::findorFail($id);
-        $customer = Customer::where('id',$invoiceInfo->customer_id)->first();
-        if(!empty($invoiceInfo)){
-            return response($customer);
-        }else
-        {
+        
+
+        // if(!empty($invoiceInfo)){
+        //     return response($customer);
+        // }else
+        // {
            
-            return response($request);
-        }
+        //     return response($request);
+        // }
         
     }
 
@@ -45,7 +47,8 @@ class ReturninfoController extends Controller
      */
     public function create()
     {
-        return view('returninfo.returnForm');
+        $products = Product::all();
+        return view('returninfo.returnForm')->with('products',$products);
     }
 
     /**
@@ -56,7 +59,47 @@ class ReturninfoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $productId = $request->input('productId');
+        $quantity = $request->input('quantity');
+        $damage = $request->input('damage');
+        $invoiceId = $request->input('invoiceId');
+
+        $invoice = Invoice::findorFail($invoiceId);
+
+        //to check how mutch quantity customer buy
+        $product = $invoice->products->where('id',$productId)->first();
+        $aqureQuantity = $product->pivot['quantity'];
+
+        $pup = $product->pivot['pup'];
+        $percentage = $product->pivot['percentage'];
+        $total = $quantity * $pup;
+        $returnAmount = ceil($total - ($total * $percentage) / 100);
+
+            if($quantity <= $aqureQuantity){
+                    $returninfo = new Returninfo;
+                    $returninfo->product_id = $productId;
+                    $returninfo->returnQuantity = $quantity;
+                    $returninfo->damage = $damage;
+                    $returninfo->returnAmount = $returnAmount;
+                    $returninfo->invoice_id = $invoiceId;
+                    $returninfo->save();
+                    $product->quantity = $product->quantity + ( $quantity - $damage );
+                    $product->save();
+                    // $product->pivot->quantity = $aqureQuantity - $quantity;
+                    // $product->pivot->save();
+
+
+                    return redirect('/returninfos/'.$returninfo->id)->with('success','done');
+
+
+            }
+            else{
+
+                return 'not good';
+            }
+
+
+
     }
 
     /**
@@ -65,9 +108,10 @@ class ReturninfoController extends Controller
      * @param  \App\Returninfo  $returninfo
      * @return \Illuminate\Http\Response
      */
-    public function show(Returninfo $returninfo)
+    public function show($id)
     {
-        //
+        $returninfo = Returninfo::find($id);
+        return view('returninfo.show')->with('returninfo',$returninfo);
     }
 
     /**

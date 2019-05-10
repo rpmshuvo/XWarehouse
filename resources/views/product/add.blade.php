@@ -11,7 +11,7 @@
 					<input type="text" class="form-control" name= "productName" id="productName" placeholder="Product Name" required>
 				</div>
 				<div class="form-group col-md-2">
-					<input type="number" class="form-control" name="quantity" id="Quantity" placeholder="Quantity" required>
+					<input type="number" class="form-control" name="quantity" id="quantity" placeholder="Quantity" required>
 				</div>
 				<div class="form-group col-md-4">
 					<div class="input-group mb-3">

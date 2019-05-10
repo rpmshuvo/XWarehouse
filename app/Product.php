@@ -13,6 +13,6 @@ class Product extends Model
 
     public function invoices()
 	  {
-	      return $this->belongsToMany('App\Invoice')->withPivot('quantity');
+	      return $this->belongsToMany('App\Invoice')->withPivot('quantity','pup','percentage','netPrice');
 	  }
 }

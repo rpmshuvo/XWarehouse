@@ -78,13 +78,13 @@ class InvoiceController extends Controller
         foreach ($products as $key => $product) {
 
             // data inserting to pivot table 
-            $invoice->products()->attach(floatval($product['productId']),['quantity'=>$product['quantity']]);
+            $invoice->products()->attach(floatval($product['productId']),['quantity'=>$product['quantity'],'pup'=>$product['price'],'percentage'=>$product['percentage'],'netPrice'=>$product['netPrice']]);
            
            // after selling deduct the selling quantity from database 
             Product::where('id',$product['productId'])->decrement('quantity', $product['quantity']);
 
         }
-        return response($customer);
+        return response($invoice->id);
     }
 
     /**
@@ -93,9 +93,10 @@ class InvoiceController extends Controller
      * @param  \App\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function show(Invoice $invoice)
+    public function show($id)
     {
-        //
+        $invoice = Invoice::find($id);
+        return view('invoice.show',compact('invoice'));
     }
 
     /**
@@ -104,9 +105,9 @@ class InvoiceController extends Controller
      * @param  \App\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function edit(Invoice $invoice)
+    public function edit($id)
     {
-        //
+        return redirect('/home');
     }
 
     /**
@@ -118,7 +119,7 @@ class InvoiceController extends Controller
      */
     public function update(Request $request, Invoice $invoice)
     {
-        //
+        return redirect('/home');
     }
 
     /**
@@ -132,9 +133,5 @@ class InvoiceController extends Controller
         //
     }
 
-    public function quantityUpdate( $id, $quantity)
-    {
-        
-        return ;
-    }
+
 }

@@ -7,7 +7,6 @@
     	<div class="row">
     		<div class="col-6">
     			<div class="form-group">
-    				<label class="form-control">Category Name:</label>
     				<input class="form-control" type="text" name="category" placeholder="Category Name">
     				<br>
     				<button type="submit" class="btn btn-primary">save</button>
