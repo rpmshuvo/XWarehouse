@@ -48,6 +48,24 @@ class InvoiceController extends Controller
     public function store(Request $request)
     {
 
+        $this->validate($request,[
+            'phoneNumber' => 'required',
+            'products' => 'required',
+            'totalAmount' => 'required',
+            'deliveryCharge' =>'required',
+            'discount' => 'required',
+            'paidAmount' => 'required',
+
+        ]);
+
+        $totalAmount = floatval($request->input('totalAmount'));
+        $deliveryCharge = floatval($request->input('deliveryCharge'));
+        $discount = floatval($request->input('discount'));
+        $paidAmount = floatval($request->input('paidAmount'));
+
+        $netAmount = $totalAmount + $deliveryCharge - $discount;
+        $amountDue = $netAmount - $paidAmount;
+
         //to find customer is exist in databade or not
         $customer = Customer::where('phoneNumber',$request->input('phoneNumber'))->first();
         
@@ -65,12 +83,12 @@ class InvoiceController extends Controller
 
 
          $invoice = new Invoice;
-         $invoice->totalAmount = floatval($request->input('totalAmount'));
-         $invoice->deliveryCharge = floatval($request->input('deliveryCharge'));
-         $invoice->discount = floatval($request->input('discount'));
-         $invoice->netAmount = floatval($request->input('netAmount'));
-         $invoice->paidAmount = floatval($request->input('paidAmount'));
-         $invoice->amountDue = floatval($request->input('amountDue'));
+         $invoice->totalAmount = $totalAmount;
+         $invoice->deliveryCharge = $deliveryCharge;
+         $invoice->discount = $discount;
+         $invoice->netAmount = $netAmount;
+         $invoice->paidAmount = $paidAmount;
+         $invoice->amountDue = $amountDue;
          $invoice->customer_id = $customer->id;
          $invoice->user_id =auth()->user()->id ;
          $invoice->save();

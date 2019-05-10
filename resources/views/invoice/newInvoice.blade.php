@@ -245,7 +245,7 @@
 									type="text"
 									class="form-control"
 									id="deliveryCharge"
-
+									required
 									placeholder="0"
 									onkeyup="calculation1()"
 									
@@ -263,7 +263,7 @@
 									id="discount"
 									name="discount"
 									placeholder="0.00"
-									
+									required
 									onkeyup="calculation2()"
 									/>
 								</div>
@@ -289,7 +289,7 @@
 								>
 								<div class="form-group col-md-2">
 									<div class="input-group mb-2">
-										<select class="custom-select" id="payMethod" required>
+										<select class="custom-select" id="payMethod" required disabled="">
 											<option selected>Choose...</option>
 											<option value="1">Paid</option>
 											<option value="2">Partial</option>

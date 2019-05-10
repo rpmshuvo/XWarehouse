@@ -27,5 +27,6 @@ Route::get('/findPrice','ProductController@findPrice');
 Route::get('/invoiceInformation/','ReturninfoController@invoiceInformation');
 
 Route::Resource('employees', 'EmployeeController')->middleware('role:admin');
+Route::get('/generate-Pdf/{id}','HomeController@generatePDF');
 
 

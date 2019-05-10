@@ -286,6 +286,7 @@
 				</td>
 			</tr>
 		</table>
+		<a class="btn btn-info" href="/generate-Pdf/{{$invoice->id}}">Print</a>
 	</div>
 </body>
 </html>

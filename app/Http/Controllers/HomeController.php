@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Product;
 use App\Returninfo;
+use PDF;
+use App\Invoice;
 
 class HomeController extends Controller
 {
@@ -39,5 +41,14 @@ class HomeController extends Controller
                                 ->with('damage',$damage)
                                 ->with('totalProducts',$totalProducts)
                                 ->with('stockValue',$stockValue);
+    }
+    public function generatePDF($id)
+    {
+        $invoice = Invoice::find($id);
+        $pdf = PDF::loadView('invoice.pdf',['invoice'=>$invoice]);
+        $fileName = $invoice->id;
+        
+
+        return $pdf->stream($fileName . '.pdf');
     }
 }

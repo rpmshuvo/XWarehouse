@@ -15,17 +15,23 @@
 					<th>Net Amount</th>
 					<th>Paid Amount</th>
 					<th>Due Amount</th>
+					<th>print</th>
 				</tr>
 			</thead>
 			<tbody>
 				@foreach($invoices as $invoice)
 				<tr>
-					<td>{{$invoice->id}}</td>
+					<td>
+						<a href="/invoices/{{$invoice->id}}">
+							{{$invoice->id}}
+						</a>
+					</td>
 					<td>{{$invoice->totalAmount}}</td>
 					<td>{{$invoice->discount}}</td>
 					<td>{{$invoice->netAmount}}</td>
 					<td>{{$invoice->paidAmount}}</td>
 					<td>{{$invoice->amountDue}}</td>
+					<td><a class="btn btn-info" href="/generate-Pdf/{{$invoice->id}}">PDF</a></td>
 				</tr>
 				@endforeach
 			</tbody>
