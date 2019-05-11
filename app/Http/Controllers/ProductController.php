@@ -178,6 +178,9 @@ class ProductController extends Controller
     public function destroy( $id)
     {
         $product=Product::find($id);
+
+// this comment out part mustbe uncomment in final version
+
         // if($product->productImage!='noImage.jpg'){
         //     Storage:delete('public/productImage/'.$product->productImage);
         // }

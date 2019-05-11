@@ -5,7 +5,7 @@
 	<hr />
 	<div class="container">
 		<form class="form-inline">
-			<input class="form-control mr-sm-2" type="text" placeholder="Search Products">
+			<input class="form-control mr-sm-2" type="text" placeholder="Search not done yet">
 			<button class="btn btn-secondary" type="submit">Search</button>
 		</form><br/>
 		<div class="table-responsive">

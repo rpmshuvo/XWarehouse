@@ -1,5 +1,5 @@
 <!-- navbar-->
-<div class="container">
+<div class="container d-none d-sm-block">
 	
 <ul id="sideBar" class="navbar-nav  bg-dark text-white">
 	<li class="nav-item p">
