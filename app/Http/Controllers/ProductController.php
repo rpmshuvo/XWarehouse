@@ -178,9 +178,9 @@ class ProductController extends Controller
     public function destroy( $id)
     {
         $product=Product::find($id);
-        if($product->productImage!='noImage.jpg'){
-            Storage:delete('public/productImage/'.$product->productImage);
-        }
+        // if($product->productImage!='noImage.jpg'){
+        //     Storage:delete('public/productImage/'.$product->productImage);
+        // }
         $product->delete();
         return redirect('/products')->with('success','product deleted');
     }
