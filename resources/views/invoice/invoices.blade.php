@@ -31,7 +31,7 @@
 					<td>{{$invoice->netAmount}}</td>
 					<td>{{$invoice->paidAmount}}</td>
 					<td>{{$invoice->amountDue}}</td>
-					<td><a class="btn btn-info" href="/generate-Pdf/{{$invoice->id}}">PDF</a></td>
+					<td><a class="btn btn-info" href="/generate-Pdf/{{$invoice->id}}" target="_blank">PDF</a></td>
 				</tr>
 				@endforeach
 			</tbody>
