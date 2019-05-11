@@ -21,7 +21,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::Resource('categories', 'CategoryController');
 Route::Resource('products', 'ProductController');
-Route::Resource('invoices', 'invoiceController');
+Route::Resource('invoices', 'InvoiceController');
 Route::Resource('returninfos', 'ReturninfoController');
 Route::get('/findPrice','ProductController@findPrice');
 Route::get('/invoiceInformation/','ReturninfoController@invoiceInformation');
