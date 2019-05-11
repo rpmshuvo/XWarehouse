@@ -14,6 +14,7 @@
 					<tr>
 						<th>Product Name</th>
 						<th>Image</th>
+						<th>Category</th>
 						<th>Buying PUP</th>
 						<th>Selling PUP</th>
 						<th>Quantity</th>
@@ -32,6 +33,7 @@
 						<td>
 							<img style="width:35px;height:35px" class="rounded" src="/storage/productImage/{{$product->productImage}}"alt="Product Image">
 						</td>
+						<td class="text-capitalize">{{$product->category->name}}</td>
 						<td>{{$product->buyPrice}}</td>
 						<td>
 							{{$product->sellPrice}}</td>
