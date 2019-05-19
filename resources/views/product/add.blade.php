@@ -11,7 +11,7 @@
 					<input type="text" class="form-control" name= "productName" id="productName" placeholder="Product Name" required>
 				</div>
 				<div class="form-group col-md-2">
-					<input type="number" class="form-control" name="quantity" id="quantity" placeholder="Quantity" required>
+					<input type="number" class="form-control" name="quantity" id="quantity" placeholder="Quantity" min='0' required>
 				</div>
 				<div class="form-group col-md-4">
 					<div class="input-group mb-3">
@@ -38,7 +38,7 @@
 							<span class="input-group-text">$</span>
 							<span class="input-group-text">Buying PUP</span>
 						</div>
-						<input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="buyPrice" id="buyPrice" required placeholder="0.00">
+						<input type="number" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="buyPrice" id="buyPrice" required placeholder="0.00" min='0'>
 					</div>
 				</div>
 				<div class="form-group col-md-3">
@@ -47,7 +47,7 @@
 							<span class="input-group-text">$</span>
 							<span class="input-group-text">Selling PUP</span>
 						</div>
-						<input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="sellPrice" id="sellPrice" required placeholder="0.00">
+						<input type="number" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="sellPrice" id="sellPrice" required placeholder="0.00" min='0'>
 					</div>
 				</div>
 				<div class="form-group col-md-4">

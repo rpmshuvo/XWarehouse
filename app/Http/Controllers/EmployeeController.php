@@ -20,7 +20,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::orderby('created_at','desc')->paginate(10);
         return view('employee.employees')->with('employees',$users);
     }
 
@@ -67,7 +67,9 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        return view('employee.employees');
+        
+        $user = User::find($id);
+        return view('employee.show')->with('employee',$user);
     }
 
     /**
@@ -79,7 +81,9 @@ class EmployeeController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view('employee.edit')->with('employee',$user);
+        $roles = Role::all();
+        return view('employee.edit')->with('employee',$user)
+                                    ->with('roles',$roles);
     }
 
     /**
@@ -99,6 +103,12 @@ class EmployeeController extends Controller
         $user = User::find($id);
         $user->name = $request->input('name');
         $user->email = $request->input('email');
+        if($request->input('role') != null)
+        {
+           
+            $user->syncRoles([$request->input('role')]);
+        }
+        
         $user->save();
 
         return redirect ('/employees')->with('success','Employee information updated');

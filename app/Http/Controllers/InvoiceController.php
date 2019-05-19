@@ -24,7 +24,7 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        $invoices = Invoice::all();
+        $invoices = Invoice::orderby('created_at','desc')->paginate(10);
         return view('invoice.invoices')->with('invoices',$invoices);
     }
 
@@ -35,7 +35,7 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        $products = Product::all();
+        $products = Product::all()->where('status',1);
         return view('invoice.newInvoice')->with('products',$products);
     }
 
@@ -146,9 +146,12 @@ class InvoiceController extends Controller
      * @param  \App\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Invoice $invoice)
+    public function destroy($id)
     {
-        //
+        $invoice=Invoice::find($id);
+
+        $invoice->delete();
+        return redirect('/invoices')->with('success','invoice deleted');
     }
 
 

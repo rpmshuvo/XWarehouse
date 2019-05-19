@@ -8,6 +8,7 @@ use App\Product;
 use App\Returninfo;
 use PDF;
 use App\Invoice;
+use DB;
 
 class HomeController extends Controller
 {
@@ -28,11 +29,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $stockValue = 0 ;
         $numberOfEmployees = User::count();
         $damage = Returninfo::sum('damage');
         $totalProducts = Product::sum('quantity');
+        $revenue = Invoice::sum('netAmount');
         $products = Product::all();
-        $stockValue = 0 ;
+        
         foreach ($products as $key => $product) {
             $stockValue = $stockValue + $product->quantity * $product->sellPrice;
         }
@@ -40,7 +43,8 @@ class HomeController extends Controller
         return view('dashboard')->with('numberOfEmployees',$numberOfEmployees)
                                 ->with('damage',$damage)
                                 ->with('totalProducts',$totalProducts)
-                                ->with('stockValue',$stockValue);
+                                ->with('stockValue',$stockValue)
+                                ->with('revenue',$revenue);
     }
     public function generatePDF($id)
     {
@@ -50,5 +54,13 @@ class HomeController extends Controller
         
 
         return $pdf->stream($fileName . '.pdf');
+    }
+
+    public function salesReport(Request $request)
+    {
+       /* $report = DB::table('invoices')->select(DB::raw('count(*) as data'), DB::raw)->groupBy('created_at')->get();*/
+
+       $report = Invoice::selectRaw('sum(netAmount) as netAmount, YEAR(created_at) year')->groupBy('year')->get();
+        return response($report);
     }
 }

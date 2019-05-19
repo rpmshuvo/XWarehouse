@@ -1,7 +1,18 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        
+    </title>
+    @include('inc.link')
+</head>
+<body style="padding-top: 100px;">
+<h2 align="center">
+    <a href="/login" style="text-decoration: none; color:black;">{{ config('APP.NAME', 'XWarehouse') }}</a>
+    
+</h2><br>
 
-@section('content')
-<div class="container">
+<div class="container" style="width: auto; height: auto;">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -33,7 +44,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" disabled >
                                     {{ __('Send Password Reset Link') }}
                                 </button>
                             </div>
@@ -44,4 +55,6 @@
         </div>
     </div>
 </div>
-@endsection
+
+</body>
+</html>

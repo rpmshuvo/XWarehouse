@@ -28,7 +28,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products=Product::orderby('created_at','desc')->get();
+        $products=Product::orderby('created_at','desc')->paginate(10);
         return view('product.products')->with('products',$products); 
     }
 
@@ -85,6 +85,7 @@ class ProductController extends Controller
         $product->sellPrice=$request->input('sellPrice');
         $product->productImage=$fileNameToStore;
         $product->details=$request->input('details');
+        $product->status = 1;
         $product->save();
         $save=$request->input('save');
         if ($save==0) {
@@ -165,6 +166,7 @@ class ProductController extends Controller
             $product->productImage=$fileNameToStore;
         }
         $product->details=$request->input('details');
+        $product->status = $request->input('status');
         $product->save();
         return redirect('/products')->with('success','Product has been updated');
     }
@@ -178,12 +180,9 @@ class ProductController extends Controller
     public function destroy( $id)
     {
         $product=Product::find($id);
-
-// this comment out part mustbe uncomment in final version
-
-        // if($product->productImage!='noImage.jpg'){
-        //     Storage:delete('public/productImage/'.$product->productImage);
-        // }
+        if($product->productImage!='noImage.jpg'){
+            Storage:delete('public/productImage/'.$product->productImage);
+        }
         $product->delete();
         return redirect('/products')->with('success','product deleted');
     }

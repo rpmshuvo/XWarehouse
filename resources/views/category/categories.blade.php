@@ -2,8 +2,17 @@
 @section('content')
 <div class="container ml-1">
   
-    
-      <h1>Category</h1>
+    <div class="row">
+      <div class="col-8">
+        <h1>Category</h1>
+      </div>
+      <div class="4">
+        @role('admin|moderator')
+        <a class="btn btn-sm btn-info" href="/categories/create">Add new</a>
+        @endrole
+      </div>
+    </div>
+      
     
   <div class="row">
     <div class="col-lg-9 col-md-6">

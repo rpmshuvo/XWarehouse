@@ -12,7 +12,7 @@
 					<input type="text" class="form-control" name= "productName" value="{{$product->productName}}" id="productName" placeholder="Product Name" required>
 				</div>
 				<div class="form-group col-md-2">
-					<input type="number" class="form-control" name="quantity" value="{{$product->quantity}}" id="Quantity" placeholder="Quantity" required>
+					<input type="number" class="form-control" name="quantity" value="{{$product->quantity}}" id="Quantity" placeholder="Quantity" min='0' required >
 				</div>
 				<div class="form-group col-md-4">
 					<div class="input-group mb-3">
@@ -30,6 +30,17 @@
 						</select>
 					</div>
 				</div>
+				<div class="form-group col-md-4">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="category">Status</label>
+						</div>
+						<select class="custom-select" name="status" id="status" required>
+							<option value="1" selected>In Stock</option>
+							<option value="0">Out of Stock</option>
+						</select>
+					</div>
+				</div>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-3">
@@ -38,7 +49,7 @@
 							<span class="input-group-text">$</span>
 							<span class="input-group-text">Buying PUP</span>
 						</div>
-						<input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="buyPrice" value="{{$product->buyPrice}}" id="buyPrice" required placeholder="0.00">
+						<input type="number" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="buyPrice" value="{{$product->buyPrice}}" id="buyPrice" required placeholder="0.00" min='0'>
 					</div>
 				</div>
 				<div class="form-group col-md-3">
@@ -47,7 +58,7 @@
 							<span class="input-group-text">$</span>
 							<span class="input-group-text">Selling PUP</span>
 						</div>
-						<input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="sellPrice" value="{{$product->sellPrice}}" id="sellPrice" required placeholder="0.00">
+						<input type="number" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="sellPrice" value="{{$product->sellPrice}}" id="sellPrice" required placeholder="0.00" min='0'>
 					</div>
 				</div>
 				<div class="form-group col-md-4">
@@ -59,6 +70,7 @@
 					<textarea class="form-control" name="details"  id="details" placeholder="Write more details about product." rows="3">{{$product->details}}</textarea>
 				</div>
 			</div>
+
 			<button class="btn btn-primary" type="submit" name="save">save</button>
 		</div>
 	</form>

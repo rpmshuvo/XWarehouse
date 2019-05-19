@@ -16,6 +16,7 @@
 					<th>Paid Amount</th>
 					<th>Due Amount</th>
 					<th>print</th>
+					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -32,10 +33,22 @@
 					<td>{{$invoice->paidAmount}}</td>
 					<td>{{$invoice->amountDue}}</td>
 					<td><a class="btn btn-info" href="/generate-Pdf/{{$invoice->id}}" target="_blank">PDF</a></td>
+					<td>
+						@can('delete product')
+						<div class="d-inline-block">
+							<form method="POST" action="{{route('invoices.destroy',$invoice->id)}}">
+								@method('DELETE')
+								@csrf
+								<button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+							</form>
+						</div>
+						@endcan
+					</td>
 				</tr>
 				@endforeach
 			</tbody>
 		</table>
+		{{$invoices->onEachSide(1)->links()}}
 		@else
 		<h1>No Invoices Found</h1>
 		@endif

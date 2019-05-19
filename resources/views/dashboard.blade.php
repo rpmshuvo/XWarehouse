@@ -63,18 +63,20 @@
 					<h4>Damage</h4>
 				</div>
 			</div>
+			@role('admin|moderator')
 			<div class="w3-third" style="padding-top: 10px;">
 				<div class="w3-container w3-orange w3-padding-16">
 					<div class="w3-left">
 						<i class="fa fa-dollar w3-xxxlarge"></i>
 					</div>
 					<div class="w3-right">
-						<h3>#####</h3>
+						<h3>{{$revenue}}</h3>
 					</div>
 					<div class="w3-clear"></div>
 					<h4>Revenue</h4>
 				</div>
 			</div>
+			@endrole
 			<div class="w3-third" style="padding-top: 10px;">
 				<div class="w3-container w3-green w3-padding-16">
 					<div class="w3-left">
@@ -87,6 +89,14 @@
 					<h4>Profit</h4>
 				</div>
 			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-9">
+				<label><h3>See the Yearly Sales report :</h3> </label>	
+				<div class="col-lg-9" id="yearlyChart" style="height: 250px;"></div>
+			</div>
+
+			
 		</div>
 	</div>
 </div>

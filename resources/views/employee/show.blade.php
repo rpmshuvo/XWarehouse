@@ -8,9 +8,6 @@
                 <div class="card-header">{{ __('Employee Information') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('employees.update',$employee->id)}}">
-                        @csrf
-                        @method('put')
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
@@ -40,18 +37,11 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
 
                             <div class="col-md-6">
-                                <select class="custom-select" name="role" id="role" >
-                                    <option value="" selected>{{$employee->getRoleNames()}}</option>
-                                    @if(count($roles)>0)
-                                    @foreach($roles as $role)
-                                        <option value="{{$role->name}}">{{$role->name}}</option>
-                                    @endforeach
-                                    @endif
+                                <input id="role" type="role" class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" name="email" value="{{ $employee->roles->pluck('name') }}" required>
 
-                                </select>
                                 @if ($errors->has('role'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('role') }}</strong>
@@ -59,14 +49,6 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Confirm') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>

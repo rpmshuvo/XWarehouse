@@ -88,23 +88,23 @@ function readFormData() {
 
 //to get element text
 function getSelectedText(elementId) {
-    var elt = document.getElementById(elementId);
+  var elt = document.getElementById(elementId);
 
-    if (elt.selectedIndex == -1)
-        return null;
+  if (elt.selectedIndex == -1)
+    return null;
 
-    return elt.options[elt.selectedIndex].text;
+  return elt.options[elt.selectedIndex].text;
 }
 
 function insertNewRecord(data) {
 // store added product in array
-  products.push(data);
+products.push(data);
   //console.log(products);
 
   document.getElementById("invoice").style.display = "block";
   var table = document
-    .getElementById("invoiceList")
-    .getElementsByTagName("tbody")[0];
+  .getElementById("invoiceList")
+  .getElementsByTagName("tbody")[0];
   var newRow = table.insertRow(table.length);
   cell1 = newRow.insertCell(0);
   cell1.innerHTML = table.rows.length;
@@ -178,21 +178,23 @@ function onDelete(td) {
     if (table.rows.length == 0) {
       products = [];
   //    console.log(products);
-      document.getElementById('invoice').style.display = "none";
+  document.getElementById('invoice').style.display = "none";
+}
+if (table.rows.length > 0) {
+  calcu();
+  function calcu() {
+    var totalAmount = 0;
+    for (var i = 0; i < table.rows.length; i++) {
+      totalAmount =
+      totalAmount + parseFloat(table.rows[i].cells[6].innerHTML);
     }
-    if (table.rows.length > 0) {
-      calcu();
-      function calcu() {
-        var totalAmount = 0;
-        for (var i = 0; i < table.rows.length; i++) {
-          totalAmount =
-            totalAmount + parseFloat(table.rows[i].cells[6].innerHTML);
-        }
-        document.getElementById("totalAmount").value = totalAmount;
-      }
-    }
+    document.getElementById("totalAmount").value = totalAmount;
   }
 }
+}
+}
+
+
 
 
 
@@ -205,63 +207,110 @@ $(document).ready(function(){
 
 //for find product's price
 
-  $('#productName').change(function(){
-    var productId= $(this).val();
-    var a = $(this).parent();
-    $.ajaxSetup({ headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')} })
-    $.ajax({
-      url:'/findPrice',
-      type:'get',
-      data:{'id':productId},
-      dataType:'JSON',
-      success:function(data)
-      {
-        $('#available').html(data.quantity);
-        $('#price').val(data.sellPrice);
+$('#productName').change(function(){
+  var productId= $(this).val();
+  var a = $(this).parent();
+  $.ajaxSetup({ headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')} })
+  $.ajax({
+    url:'/findPrice',
+    type:'get',
+    data:{'id':productId},
+    dataType:'JSON',
+    success:function(data)
+    {
+      $('#available').html(data.quantity);
+      $('#price').val(data.sellPrice);
 
-      }
-    });
+    }
   });
+});
+
 
 //for submit the checkout form
 
-  $('#invoiceForm').submit(function(event){
-      event.preventDefault();
+$('#invoiceForm').submit(function(event){
+  event.preventDefault();
   if (confirm('are you sure')) {
-      var phoneNumber = $('#phoneNumber').val();
-      var name = $('#name').val();
-      var address = $('#address').val();
-      var totalAmount = $('#totalAmount').val();
-      var deliveryCharge = $('#deliveryCharge').val();
-      var discount = $('#discount').val();
-      var netAmount = $('#netAmount').val();
-      var paidAmount = $('#paidAmount').val();
-      var amountDue = $('#amountDue').val();
+    var phoneNumber = $('#phoneNumber').val();
+    var name = $('#name').val();
+    var address = $('#address').val();
+    var totalAmount = $('#totalAmount').val();
+    var deliveryCharge = $('#deliveryCharge').val();
+    var discount = $('#discount').val();
+    var netAmount = $('#netAmount').val();
+    var paidAmount = $('#paidAmount').val();
+    var amountDue = $('#amountDue').val();
 
-      $.ajaxSetup({ headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')} })
-      $.ajax({
-        url:'/invoices',
-        type:'POST',
-        data:{'products': products,
-              'phoneNumber' : phoneNumber,
-              'name' : name,
-              'address' : address,
-              'totalAmount' : totalAmount,
-              'deliveryCharge' : deliveryCharge,
-              'discount' : discount,
-              'netAmount' : netAmount,
-              'paidAmount' : paidAmount,
-              'amountDue' : amountDue,
-              },
-        dataType:'JSON',
-        success:function(data)
-        {
+    $.ajaxSetup({ headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')} })
+    $.ajax({
+      url:'/invoices',
+      type:'POST',
+      data:{'products': products,
+      'phoneNumber' : phoneNumber,
+      'name' : name,
+      'address' : address,
+      'totalAmount' : totalAmount,
+      'deliveryCharge' : deliveryCharge,
+      'discount' : discount,
+      'netAmount' : netAmount,
+      'paidAmount' : paidAmount,
+      'amountDue' : amountDue,
+    },
+    dataType:'JSON',
+    success:function(data)
+    {
           //console.log(data);
-           window.location.replace("/invoices/" + data);
+          window.location.replace("/invoices/" + data);
 
         }
       });
-    }
-  });
-
+  }
 });
+
+
+
+
+  var time= $(this).val();
+  $.ajaxSetup({ headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')} })
+  $.ajax({
+    url:'/salesReport',
+    type:'get',
+    data:{'time':time},
+    dataType:'JSON',
+    success:function(data)
+    {
+console.log(data);
+         //moris chart 
+            new Morris.Bar({
+          // ID of the element in which to draw the chart.
+          element: 'yearlyChart',
+          // Chart data records -- each entry in this array corresponds to a point on
+          // the chart.
+
+
+          data: data,
+          // The name of the data record attribute that contains x-values.
+          xkey: ['year'],
+          // A list of names of data record attributes that contain y-values.
+          ykeys: ['netAmount'],
+          // Labels for the ykeys -- will be displayed when you hover over the
+          // chart.
+          labels: ['taka']
+        });
+           
+          }
+        });
+
+
+
+
+
+
+
+
+
+
+// document closing
+});
+
+

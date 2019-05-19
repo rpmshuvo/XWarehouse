@@ -135,20 +135,20 @@ $(document).ready(function(){
 //for find invoice information in return form
 $('#invoiceId').submit(function(event){
     event.preventDefault();
-		  var invoiceId = $(this).val();
-		  $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name = "csrf-token"]').attr('content')} })
-		  $.ajax({
-		    url : '/invoiceInformation',
-		    type : 'get',
-		    data : {'id' : invoiceId},
-		    dataType : 'JSON',
-		    success :function(data){
-		      
-		        console.log(data);
+      var invoiceId = $(this).val();
+      $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name = "csrf-token"]').attr('content')} })
+      $.ajax({
+        url : '/invoiceInformation',
+        type : 'get',
+        data : {'id' : invoiceId},
+        dataType : 'JSON',
+        success :function(data){
+          
+            console.log(data);
 
-		  
-		    }
-		  });
+      
+        }
+      });
   });
 
 });
@@ -186,25 +186,25 @@ $('#invoiceId').submit(function(event){
 /*
 $(document).ready(function(){
 
-	$('#productName').change(function(){
-		var productId= $(this).val();
-		var a = $(this).parent();
-		$.ajaxSetup({ headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')} })
-		$.ajax({
-			url:'/findPrice',
-			type:'get',
-			data:{'id':productId},
-			dataType:'JSON',
-			success:function(data)
-			{
-				$('#available').html(data.quantity);
-				$('#price').val(data.sellPrice);
+  $('#productName').change(function(){
+    var productId= $(this).val();
+    var a = $(this).parent();
+    $.ajaxSetup({ headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')} })
+    $.ajax({
+      url:'/findPrice',
+      type:'get',
+      data:{'id':productId},
+      dataType:'JSON',
+      success:function(data)
+      {
+        $('#available').html(data.quantity);
+        $('#price').val(data.sellPrice);
 
-			}
-		});
-	});
+      }
+    });
+  });
 
-	$("#invoiceForm").submit(function() { 
+  $("#invoiceForm").submit(function() { 
                     console.log(products); 
                 });
 

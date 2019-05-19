@@ -42,6 +42,19 @@
 					<div class="container">
 						<p class="text-justify">{{$product->details}}</p>
 					</div>
+					<div class="mb-1 text-muted text-capitalize">
+						<strong class="d-inline-block mb-2 text-secondary">
+							Status: 
+							@if($product->status == true)
+							
+							<span class="badge badge-pill badge-success">In Stock </span>
+							@else
+							<span class="badge badge-pill badge-danger">Out of Stock</span>
+							
+							@endif
+						</strong>
+					</div>
+
 				
 					@can('edit product','delete product')
 					<div>
@@ -49,6 +62,7 @@
 						<div class="d-inline-block">
 							<a class="btn btn-outline-warning btn-sm" href="/products/{{$product->id}}/edit">Edit</a>
 						</div>
+						@can('delete product')
 						<div class="d-inline-block">
 							<form method="POST" action="{{route('products.destroy',$product->id)}}">
 								@method('DELETE')
@@ -56,6 +70,7 @@
 								<button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
 							</form>
 						</div>
+						@endcan
 					</div>
 					@endcan
 				</div>

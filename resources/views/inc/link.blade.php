@@ -11,6 +11,9 @@
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+  <!--morris chart-->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+  
   <link href="{{ asset('custom/CSS/dashboard.css') }}" rel="stylesheet">
   <script src="{{ asset('js/app.js') }}" defer></script>
 

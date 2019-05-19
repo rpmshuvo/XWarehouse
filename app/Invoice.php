@@ -15,4 +15,9 @@ class Invoice extends Model
       return $this->belongsToMany('App\Product')->withPivot('quantity','pup','percentage','netPrice');
   }
 
+   public function returninfos()
+  {
+      return $this->hasMany('App\Returninfo');
+  }
+
 }

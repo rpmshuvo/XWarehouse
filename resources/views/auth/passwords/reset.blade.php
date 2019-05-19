@@ -1,6 +1,13 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    @include('inc.link')
+</head>
+<body style="padding-top: 100px">
 
-@section('content')
+<h2 align="center"><a href="/login" style="text-decoration:none; color: black;">X Warehouse</a></h2><br>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -51,7 +58,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" disable>
                                     {{ __('Reset Password') }}
                                 </button>
                             </div>
@@ -62,4 +69,5 @@
         </div>
     </div>
 </div>
-@endsection
+</body>
+</html>

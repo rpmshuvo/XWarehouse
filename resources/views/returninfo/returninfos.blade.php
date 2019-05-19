@@ -1,44 +1,52 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-	<h1 class="h2">List of Return Products <span style="color:red">(Demo value)</span></h1>
+	<div class="row">
+      <div class="col-8">
+        <h1>Category</h1>
+      </div>
+      <div class="4">
+        @role('admin|moderator|salesman')
+        <a class="btn btn-sm btn-info" href="/returninfos/create">Return Form</a>
+        @endrole
+      </div>
+    </div>
 	<hr />
 	<div class="container">
 		<div>
 			<table class="table table-bordered table-hover table-sm">
 				<thead class="thead-light">
+					@if(count($returninfos)>0)
 					<tr>
-						<th>Product Name</th>
-						<th>Quantity</th>
+						<th>#Id</th>
+						<th>Product Id</th>
+						<th>Return Quantity</th>
 						<th>Damage</th>
-						<th>Name</th>
-						<th>Address</th>
+						<th>Return Money</th>
+						<th>Invoice Id</th>
+						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
+					@foreach($returninfos as $returninfo)
 					<tr>
-						<td>Shirt</td>
-						<td>50</td>
-						<td>2</td>
-						<td>Abc Company</td>
-						<td>Motijhil</td>
+						<td><a href="/returninfos/{{$returninfo->id}}">{{$returninfo->id}}</a></td>
+						<td><a href="/products/{{$returninfo->product_id}}"><span class="text-muted badge badge-warning badge-pill"  style="color: gray; width:50px;">{{$returninfo->product_id}}</span></a></td>
+						<td>{{$returninfo->returnQuantity}}</td>
+						<td>{{$returninfo->damage}}</td>
+						<td>{{$returninfo->returnAmount}}</td>
+						<td><a href="/invoices/{{$returninfo->invoice_id}}"><span class="text-muted badge badge-warning badge-pill"  style="color: gray; width:50px;">{{$returninfo->invoice_id}}</span></a></td>
+						<td><a class="btn btn-primary btn-sm" href="/returnform-Pdf/{{$returninfo->id}}" target="_blank">Print</a></td>
 					</tr>
-					<tr>
-						<td>Punjabi</td>
-						<td>10</td>
-						<td>1</td>
-						<td>Jitu</td>
-						<td>Nikunja-2</td>
-					</tr>
-					<tr>
-						<td>T-Shirt</td>
-						<td>5</td>
-						<td>0</td>
-						<td>XYZ Company</td>
-						<td>Motijhil</td>
-					</tr>
+					@endforeach
+				
+
 				</tbody>
 			</table>
+			{{$returninfos->onEachSide(1)->links()}}
+			@else
+			<h1>Not Found any return Form</h1>
+				@endif
 		</div>
 	</div>
 </div>

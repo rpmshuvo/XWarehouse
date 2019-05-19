@@ -1,15 +1,24 @@
 @extends('layouts.app')
 @section('content')
 <div>
-	<h1 class="h2">Detailed List of Products</h1>
-	<hr />
+	<div class="row">
+		<div class="col-lg-9 col-md-9 col-sm-9">
+			<h1>List of Products</h1>
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-3">
+			@role('admin|moderator')
+			<a class="btn btn-sm btn-info" href="/products/create">Add Products</a>
+			@endrole
+		</div>
+	</div>
+
 	<div class="container">
 		<form class="form-inline">
-			<input class="form-control mr-sm-2" type="text" placeholder="Search not done yet">
+			<input class="form-control mr-sm-2" type="text" placeholder="Search Products">
 			<button class="btn btn-secondary" type="submit">Search</button>
 		</form><br/>
 		<div class="table-responsive">
-			<table class="table  table-hover">
+			<table id="productsTable" class="table  table-hover">
 				<thead class="thead-light">
 					<tr>
 						<th>Product Name</th>
@@ -18,6 +27,7 @@
 						<th>Buying PUP</th>
 						<th>Selling PUP</th>
 						<th>Quantity</th>
+						<th>Status</th>
 						@can('edit product','delete product')
 						<th>Action</th>
 						@endcan
@@ -37,46 +47,35 @@
 						<td>{{$product->buyPrice}}</td>
 						<td>
 							{{$product->sellPrice}}</td>
-						<td>{{$product->quantity}}</td>
-						@can('edit product','delete product')
-						<td>
-							<div class="d-inline-block">
-								<a class="btn btn-warning btn-sm" href="/products/{{$product->id}}/edit">Edit</a>
-							</div>
-							<div class="d-inline-block">
-								<form method="POST" action="{{route('products.destroy',$product->id)}}">
-								@method('DELETE')
-								@csrf
-								<button type="submit" class="btn btn-danger btn-sm">Delete</button>
-							</form>
-							</div>
-						</td>
-						@endcan
-					</tr>
-					@endforeach
-					@else
-					<h1>No product found</h1>
-					@endif
-				</tbody>
-			</table>
-			<nav aria-label="Page navigation example">
-				<ul class="pagination pagination-sm justify-content-center">
-					<li class="page-item">
-						<a class="page-link" href="#" aria-label="Previous">
-							<span aria-hidden="true">&laquo;</span>
-						</a>
-					</li>
-					<li class="page-item active"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
-					<li class="page-item">
-						<a class="page-link" href="#" aria-label="Next">
-							<span aria-hidden="true">&raquo;</span>
-						</a>
-					</li>
-				</ul>
-			</nav>
+							<td>{{$product->quantity}}</td>
+							<td>
+								@if($product->status == false)
+								Out of Stock
+								@else
+								In Stock
+								@endif
+
+
+							</td>
+							@can('edit product')
+							<td>
+								<div class="d-inline-block">
+									<a class="btn btn-warning btn-sm" href="/products/{{$product->id}}/edit">Edit</a>
+								</div>
+							</td>
+							@endcan
+						</tr>
+						@endforeach
+						@else
+						<h1>No product found</h1>
+						@endif
+					</tbody>
+				</table>
+				<div align="center">
+					{{$products->onEachSide(1)->links()}}
+				</div>
+
+			</div>
 		</div>
 	</div>
-</div>
-@endsection
+	@endsection

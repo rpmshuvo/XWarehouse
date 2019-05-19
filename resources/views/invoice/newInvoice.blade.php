@@ -44,7 +44,7 @@
 							</span>
 						</div>
 						<input
-						type="text"
+						type="number"
 						class="form-control"
 						aria-label="Dollar amount (with dot and two decimal places)"
 						required
@@ -69,6 +69,7 @@
 						placeholder="Quantity"
 						onkeyup="totalPrice()"
 						required
+						min='0'
 						/>
 					</div>
 				</div>
@@ -93,6 +94,7 @@
 						id="percentage"
 						placeholder="In Percentage"
 						required
+						min='0'
 						onkeyup="netPrice()"
 						/>
 					</div>
@@ -159,10 +161,11 @@
 					<div class=" col-md-6 mb-3">
 						<label for="phoneNumber">Phone Number</label>
 						<input
-						type="text"
+						type="number"
 						class="form-control"
 						id="phoneNumber"
 						placeholder="Phone Number"
+						min='0'
 						required
 						/>
 					</div>
@@ -228,10 +231,11 @@
 								>
 								<div class="col-sm-2">
 									<input
-									type="text"
+									type="number"
 									readonly
 									class="form-control-plaintext"
 									id="totalAmount"
+									min='0'
 									name="totalAmount"
 									/>
 								</div>
@@ -242,11 +246,12 @@
 								>
 								<div class="col-sm-2">
 									<input
-									type="text"
+									type="number"
 									class="form-control"
 									id="deliveryCharge"
 									required
 									placeholder="0"
+									min='0'
 									onkeyup="calculation1()"
 									
 									/>
@@ -258,12 +263,13 @@
 								>
 								<div class="col-sm-2">
 									<input
-									type="text"
+									type="number"
 									class="form-control"
 									id="discount"
 									name="discount"
 									placeholder="0.00"
 									required
+									min='0'
 									onkeyup="calculation2()"
 									/>
 								</div>
@@ -274,7 +280,7 @@
 								>
 								<div class="col-sm-2">
 									<input
-									type="text"
+									type="number"
 									readonly
 									class="form-control-plaintext"
 									id="netAmount"
@@ -304,11 +310,12 @@
 								>
 								<div class="col-sm-2">
 									<input
-									type="text"
+									type="number"
 									class="form-control"
 									id="paidAmount"
 									name="paidAmount"
 									placeholder="0"
+									min='0'
 									required
 									onkeyup="finalCalculation()"
 									/>
@@ -320,7 +327,7 @@
 								>
 								<div class="col-sm-2">
 									<input
-									type="text"
+									type="number"
 									readonly
 									class="form-control-plaintext"
 									id="amountDue"

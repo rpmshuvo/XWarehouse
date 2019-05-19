@@ -15,12 +15,13 @@
 					<div class=" form-group col-md-6 mb-3">
 						<label for="invoiceId">Invoice Id </label>
 						<input
-						type="text"
+						type="number"
 						class="form-control"
 						id="invoiceId"
 						name = "invoiceId"
 						placeholder="Invoice Id"
 						value=""
+						min='0'
 						required
 						/>
 					</div>
@@ -32,6 +33,7 @@
 						id="phoneNumber"
 						name="phoneNumber"
 						placeholder="Phone Number"
+						min='0'
 						required
 						/>
 					</div>
@@ -43,13 +45,14 @@
 				<div class="form-row">
 					<div class="form-group col-md-4">
 						<input
-						type="text"
+						type="number"
 						class="form-control"
 						id="productId"
 						name = "productId"
 						placeholder="Product Id"
 						required
 						autofocus="autofocus"
+						min='0'
 						/>
 					</div>
 					<div class="form-group col-md-2">
@@ -59,6 +62,7 @@
 						id="quantity"
 						name=" quantity"
 						placeholder="Quantity"
+						min='1'
 						required
 						/>
 					</div>
@@ -72,6 +76,7 @@
 							id="damage"
 							name = "damage"
 							class="form-control"
+							min='0'
 							required
 							/>
 						</div>

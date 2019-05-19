@@ -2,9 +2,14 @@
 @section('content')
 <div class="container ml-1">
 	<div class="row">
-		<div class="col">
+		<div class="col-8">
 			<h1>Employees</h1>
 		</div>
+		@role('admin')
+		<div class="col-4">
+			<a class="btn btn-sm btn-info" href="/employees/create">Create new</a>
+		</div>
+		@endrole
 	</div>
 	<div class="row">
 		<div class="col-12">
@@ -42,8 +47,9 @@
 				</tr>
 				@endforeach
 			</table>
+			{{$employees->onEachSide(1)->links()}}
 			@else
-			<strong>no employee available</strong>
+			<h1>no employee available</h1>
 			@endif
 
 		</div>

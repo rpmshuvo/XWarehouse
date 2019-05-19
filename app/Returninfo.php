@@ -10,4 +10,7 @@ class Returninfo extends Model
   {
       return $this->hasMany('App\Product');
   }
+  public function invoice(){
+    	return $this->belongsTo('App\Invoice');
+    }
 }

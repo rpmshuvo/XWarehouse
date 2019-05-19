@@ -22,10 +22,10 @@
     <main py-0 role="main">
       @include('inc.message')
         <div class="row">
-          <div class="col-3">
+          <div class=" d-none d-md-block  col-lg-3 col-md-3 ">
             @include('inc.sideMenu')
           </div>
-          <div class="col-9 ">
+          <div class="col-lg-9 col-md-9 col-sm-12 ">
             
             @yield('content')
           </div>

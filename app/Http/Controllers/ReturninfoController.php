@@ -6,6 +6,7 @@ use App\Returninfo;
 use App\Invoice;
 use App\Customer;
 use App\Product;
+use PDF;
 use Illuminate\Http\Request;
 
 class ReturninfoController extends Controller
@@ -37,7 +38,8 @@ class ReturninfoController extends Controller
      */
     public function index()
     {
-        return view('returninfo.returninfos');
+        $returninfos = Returninfo::orderby('created_at','desc')->paginate(10);
+        return view('returninfo.returninfos')->with('returninfos',$returninfos);
     }
 
     /**
@@ -95,7 +97,7 @@ class ReturninfoController extends Controller
             }
             else{
 
-                return 'not good';
+                return redirect('/returninfos/create')->with('error','given information is not correct');
             }
 
 
@@ -110,7 +112,7 @@ class ReturninfoController extends Controller
      */
     public function show($id)
     {
-        $returninfo = Returninfo::find($id);
+        $returninfo = Returninfo::findorFail($id);
         return view('returninfo.show')->with('returninfo',$returninfo);
     }
 
@@ -146,5 +148,14 @@ class ReturninfoController extends Controller
     public function destroy(Returninfo $returninfo)
     {
         //
+    }
+    public function generatePDF($id)
+    {
+        $returninfo = Returninfo::findorFail($id);
+        $pdf = PDF::loadView('returninfo.pdf',['returninfo'=>$returninfo]);
+        $fileName = $returninfo->id;
+        
+
+        return $pdf->stream($fileName . '.pdf');
     }
 }

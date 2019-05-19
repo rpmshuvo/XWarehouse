@@ -21,12 +21,14 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::Resource('categories', 'CategoryController');
 Route::Resource('products', 'ProductController');
-Route::Resource('invoices', 'InvoiceController');
+Route::Resource('invoices', 'invoiceController');
 Route::Resource('returninfos', 'ReturninfoController');
 Route::get('/findPrice','ProductController@findPrice');
 Route::get('/invoiceInformation/','ReturninfoController@invoiceInformation');
 
 Route::Resource('employees', 'EmployeeController')->middleware('role:admin');
 Route::get('/generate-Pdf/{id}','HomeController@generatePDF');
+Route::get('/salesReport','HomeController@salesReport');
+Route::get('/returnform-Pdf/{id}','ReturninfoController@generatePDF');
 
 

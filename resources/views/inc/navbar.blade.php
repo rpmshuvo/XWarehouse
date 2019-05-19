@@ -21,8 +21,16 @@
           <a class="nav-link" href="/products">Product</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/invoices">invoice</a>
+          <a class="nav-link" href="/invoices">Invoice</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/returninfos">Returninfos</a>
+        </li>
+        @role('admin')
+        <li class="nav-item">
+          <a class="nav-link" href="/employees">Employees</a>
+        </li>
+        @endrole
       </ul>
 
       <!-- Right Side Of Navbar -->
