@@ -1,3 +1,13 @@
+## About this Project
+To see the demo of this Project, Please Click on this link <a href="http://xwarehouse.herokuapp.com" target="_blank">XWarehouse</a>
+
+   - email: admin@admin.com
+   - password:123456
+
+
+
+
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
