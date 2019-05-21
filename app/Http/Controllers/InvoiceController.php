@@ -35,7 +35,7 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        $products = Product::all()->where('status',1);
+        $products = Product::all();
         return view('invoice.newInvoice')->with('products',$products);
     }
 
