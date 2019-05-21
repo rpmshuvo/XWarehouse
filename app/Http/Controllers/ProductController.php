@@ -85,7 +85,7 @@ class ProductController extends Controller
         $product->sellPrice=$request->input('sellPrice');
         $product->productImage=$fileNameToStore;
         $product->details=$request->input('details');
-        $product->status = 1;
+       // $product->status = 1;
         $product->save();
         $save=$request->input('save');
         if ($save==0) {
@@ -166,7 +166,7 @@ class ProductController extends Controller
             $product->productImage=$fileNameToStore;
         }
         $product->details=$request->input('details');
-        $product->status = $request->input('status');
+      //  $product->status = $request->input('status');
         $product->save();
         return redirect('/products')->with('success','Product has been updated');
     }
