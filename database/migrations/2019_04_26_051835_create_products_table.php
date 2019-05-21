@@ -21,7 +21,6 @@ class CreateProductsTable extends Migration
             $table->double('sellPrice',8,2);
             $table->string('productImage');
             $table->mediumText('details');
-            $table->boolean('status');
             $table->integer('category_id');
             $table->timestamps();
         });

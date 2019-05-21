@@ -23,6 +23,5 @@ $factory->define(App\Product::class, function (Faker $faker) {
         'sellPrice' => $faker->numberBetween(100,2000),
         'productImage' => 'noImage.jpg',
         'details' => $faker->text(200),
-        'status' =>$faker->numberBetween(0,1),
     ];
 });

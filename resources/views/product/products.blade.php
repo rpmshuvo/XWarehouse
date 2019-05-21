@@ -27,7 +27,6 @@
 						<th>Buying PUP</th>
 						<th>Selling PUP</th>
 						<th>Quantity</th>
-						<th>Status</th>
 						@can('edit product','delete product')
 						<th>Action</th>
 						@endcan
@@ -48,15 +47,7 @@
 						<td>
 							{{$product->sellPrice}}</td>
 							<td>{{$product->quantity}}</td>
-							<td>
-								@if($product->status == false)
-								Out of Stock
-								@else
-								In Stock
-								@endif
 
-
-							</td>
 							@can('edit product')
 							<td>
 								<div class="d-inline-block">

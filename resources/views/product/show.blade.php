@@ -41,21 +41,7 @@
 					</div>
 					<div class="container">
 						<p class="text-justify">{{$product->details}}</p>
-					</div>
-					<div class="mb-1 text-muted text-capitalize">
-						<strong class="d-inline-block mb-2 text-secondary">
-							Status: 
-							@if($product->status == true)
-							
-							<span class="badge badge-pill badge-success">In Stock </span>
-							@else
-							<span class="badge badge-pill badge-danger">Out of Stock</span>
-							
-							@endif
-						</strong>
-					</div>
-
-				
+					</div>				
 					@can('edit product','delete product')
 					<div>
 						<hr/>
