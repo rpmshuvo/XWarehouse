@@ -51,7 +51,6 @@
 						placeholder="0.00"
 						name="price"
 						id="price"
-						onkeyup="totalPrice()"
 						readonly
 						/><!--Connected with DB & will be always in readonly mode-->
 					</div>
@@ -67,7 +66,7 @@
 						name="quantity"
 						id="quantity"
 						placeholder="Quantity"
-						onkeyup="totalPrice()"
+						onchange="totalPrice()"
 						required
 						min='0'
 						/>
