@@ -1,9 +1,8 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark navbar-laravel">
-  <div class="container">
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
     <a class="navbar-brand nav-link" href="{{ url('/home') }}">
       {{ config('APP.name', 'XWarehouse') }}
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -15,16 +14,16 @@
           <a class="nav-link" href="/home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/categories">Category</a>
+          <a class="nav-link" href="/categories">Categories</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/products">Product</a>
+          <a class="nav-link" href="/products">Products</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/invoices">Invoice</a>
+          <a class="nav-link" href="/invoices">Invoices</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/returninfos">Returninfos</a>
+          <a class="nav-link" href="/returninfos">Return Infos</a>
         </li>
         @role('admin')
         <li class="nav-item">
@@ -67,5 +66,4 @@
       @endguest
     </ul>
   </div>
-</div>
 </nav>

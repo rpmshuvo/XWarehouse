@@ -5,13 +5,13 @@
 		<li class="nav-item dropdown ">
 			<span class="text-muted badge badge-light badge-box"  style="color: gray; width:100%; height: 50px">
 				<a class="dropdown-toggle" href="#" id="categoryDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					<h5>Cetagory</h5>
+					<h5>Categories</h5>
 				</a>
 				<div class="dropdown-menu" aria-labelledby="categoryDropdown">
 					@role('admin|moderator')
 					<a class="dropdown-item" href="/categories/create">Add category</a>
 					@endrole
-					<a class="dropdown-item" href="/categories">Manage Category</a>
+					<a class="dropdown-item" href="/categories">Manage Categories</a>
 				</div>
 			</span>
 		</li>
@@ -56,7 +56,7 @@
 				</a>
 				<div class="dropdown-menu" aria-labelledby="dropdown09">
 					<a class="dropdown-item" href="/employees/create">Add employee</a>
-					<a class="dropdown-item" href="/employees">Manage employee</a>
+					<a class="dropdown-item" href="/employees">Manage employees</a>
 				</div>
 			</span>
 		</li>
