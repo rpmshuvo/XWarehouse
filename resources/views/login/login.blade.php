@@ -19,7 +19,9 @@
     </h4>
     <p>
       Email: admin@admin.com
+      <br>
       Password: 123456
+      <br>
       Use this email and password to login
     </p>
     </div>
