@@ -66,7 +66,7 @@
 						name="quantity"
 						id="quantity"
 						placeholder="Quantity"
-						onchange="totalPrice()"
+						onkeyup="totalPrice();netPrice()"
 						required
 						min='0'
 						/>
@@ -94,6 +94,7 @@
 						placeholder="In Percentage"
 						required
 						min='0'
+						max="100"
 						onkeyup="netPrice()"
 						/>
 					</div>
@@ -236,6 +237,20 @@
 									id="totalAmount"
 									min='0'
 									name="totalAmount"
+									/>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="totalAmount" class="col-sm-2 col-form-label"
+								>Round Amount:</label
+								>
+								<div class="col-sm-2">
+									<input
+									type="number"
+									readonly
+									class="form-control-plaintext"
+									id="roundAmount"
+									name="roundAmount"
 									/>
 								</div>
 							</div>

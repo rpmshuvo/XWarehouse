@@ -13,9 +13,17 @@
   @include('inc.message')
   <h2 align="center"><a href="/login" style="text-decoration:none; color: black;">X Warehouse</a></h2><br>
   <div class="container" style="width: 300px; height: auto;">
-    <h4 align="center">
+    <div>
+      <h4 align="center">
       <span class="text-muted">Please sign in</span>
     </h4>
+    <p>
+      Email: admin@admin.com
+      Password: 123456
+      Use this email and password to login
+    </p>
+    </div>
+    
     <form method="POST" action="{{ route('login') }}">
       @csrf
       <div class="form-group">

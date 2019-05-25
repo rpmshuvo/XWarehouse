@@ -133,10 +133,12 @@ products.push(data);
     var totalAmount = 0;
 
     for (var i = 0; i < table.rows.length; i++) {
-      totalAmount = totalAmount + parseInt(table.rows[i].cells[6].innerHTML);
+      totalAmount = totalAmount + parseFloat(table.rows[i].cells[6].innerHTML);
     }
 
-    document.getElementById("totalAmount").value = totalAmount;
+    document.getElementById("totalAmount").value = Math.round(totalAmount);
+    document.getElementById("roundAmount").value = (Math.round(totalAmount) - totalAmount).toFixed(2);
+
   }
 }
 
@@ -188,7 +190,8 @@ if (table.rows.length > 0) {
       totalAmount =
       totalAmount + parseFloat(table.rows[i].cells[6].innerHTML);
     }
-    document.getElementById("totalAmount").value = totalAmount;
+    document.getElementById("totalAmount").value = Math.round(totalAmount);
+    document.getElementById("roundAmount").value = (Math.round(totalAmount) - totalAmount).toFixed(2);
   }
 }
 }
