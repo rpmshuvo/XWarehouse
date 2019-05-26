@@ -17,13 +17,6 @@
       <h4 align="center">
       <span class="text-muted">Please sign in</span>
     </h4>
-    <p>
-      Email: admin@admin.com
-      <br>
-      Password: 123456
-      <br>
-      Use this email and password to login
-    </p>
     </div>
     
     <form method="POST" action="{{ route('login') }}">
@@ -48,6 +41,16 @@
       </a>
       @endif
     </form>
+    <hr />
+  </div>
+  <div class="card mx-auto" style="width: 18rem;">
+    <div class="card-header">
+      <p><em><small>Use the following information to<mark>login.</mark></small></em></p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><small><strong>Email: </strong>admin@admin.com</small></li>
+      <li class="list-group-item"><small><strong>Password: </strong>123456</small></li>
+    </ul>
   </div>
 </body>
 </html>
