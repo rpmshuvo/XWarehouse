@@ -45,9 +45,9 @@
   </div>
   <div class="card mx-auto" style="width: 18rem;">
     <div class="card-header">
-      <p><em><small>Use the following information to<mark>login.</mark></small></em></p>
+      <p class="text-center"><em><small>Use the following information to<mark>login.</mark></small></em></p>
     </div>
-    <ul class="list-group list-group-flush">
+    <ul class="list-group list-group-flush text-center">
       <li class="list-group-item"><small><strong>Email: </strong>admin@admin.com</small></li>
       <li class="list-group-item"><small><strong>Password: </strong>123456</small></li>
     </ul>
